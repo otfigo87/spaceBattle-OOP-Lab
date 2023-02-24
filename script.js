@@ -65,21 +65,37 @@ class Alien extends Ship {
 
 const player = new Player("USS Assembly",20, 5, 0.7);
 
-const alien1 = new Alien("Alien1");
-const alien2 = new Alien("Alien2");
-const alien3 = new Alien("Alien3");
-const alien4 = new Alien("Alien4");
-const alien5 = new Alien("Alien5");
-const alien6 = new Alien("Alien6");
+// const alien1 = new Alien("Alien1");
+// const alien2 = new Alien("Alien2");
+// const alien3 = new Alien("Alien3");
+// const alien4 = new Alien("Alien4");
+// const alien5 = new Alien("Alien5");
+// const alien6 = new Alien("Alien6");
 
-const allAliens = [alien1, alien2, alien3, alien4, alien5, alien6]
-
-player.attack(alien1);
-alien1.attack(player);
-
-
-
-
+// ! creating 6 aliens and store them inside an array
+const allAliens = []
+for (let i = 1; i < 7; i++) {
+  const alien = new Alien(`Alien${i}`);
+  allAliens.push(alien);
+}
 console.log(allAliens)
+
+// ! LOOP Between player and aliens
+while(player.hull > 0 && allAliens[0]){ //Player alive
+  for (let i = 0; i < allAliens.length; i++){
+   player.attack(allAliens[i]); 
+   if (allAliens[i].hull > 0){
+    allAliens[i].attack(player)
+  }else allAliens.shift(allAliens[i]);
+}
+console.log("GAME OVER!")
+}
+
+
+
+// player.attack(allAliens[1]);
+// allAliens[1].attack(player);
+
+
 
 
